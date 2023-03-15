@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_7/data.dart';
 import 'package:flutter_application_7/provider.dart';
 import 'package:provider/provider.dart';
-import 'data.dart';
 
-class AddForm extends StatefulWidget {
+class EditForm extends StatefulWidget {
   @override
-  State<AddForm> createState() => _AddForm();
+  State<EditForm> createState() => _EditForm();
 }
 
-class _AddForm extends State<AddForm> {
+class _EditForm extends State<EditForm> {
   final formKey = GlobalKey<FormState>();
-
-  final ISBN_Controller = TextEditingController();
-  final bookName_Controller = TextEditingController();
-  final price_Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final bookDetail = ModalRoute.of(context)!.settings.arguments as BookModel;
+
+    final ISBN_Controller = TextEditingController(text: bookDetail.ISBN);
+    final bookName_Controller = TextEditingController(text: bookDetail.bookName);
+    final price_Controller = TextEditingController(text: bookDetail.price.toString());
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ฟอร์มบันทึกข้อมูล'),
@@ -144,7 +146,7 @@ class _AddForm extends State<AddForm> {
         
                           var statement = BookModel(ISBN: ISBN, bookName: bookName, price: double.parse(price));
                           var provider = Provider.of<test_provider>(context,listen: false);
-                          provider.addBook(statement);
+                          provider.editBook(statement);
                           //print(ISBN + bookName + price);
         
                           Navigator.pop(context);
@@ -156,6 +158,21 @@ class _AddForm extends State<AddForm> {
                   ],
                 ),
                 //-----------------End Cancle & Submit -----------------
+                const SizedBox(height: 20),
+                GestureDetector(
+                  child: Container(
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);    
+                            
+                    var provider = Provider.of<test_provider>(context, listen: false);
+                    provider.deleteBook(bookDetail);
+                  },
+                )
               ],
             ),
           ),
