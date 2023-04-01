@@ -24,28 +24,26 @@ class transactionDB {
     var store = intMapStoreFactory.store('bookstore'); //สร้างที่เก็บข้อมูล
 
     var keyID = store.add(db, {
-      'ISBN' : statement.ISBN,
-      'bookName' : statement.bookName,
-      'price' : statement.price,
+      'ISBN': statement.ISBN,
+      'bookName': statement.bookName,
+      'price': statement.price,
     });
     db.close();
     return keyID;
   }
 
-  Future EditData(BookModel statement) async{
+  Future EditData(BookModel statement) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('bookstore');
-    
+
     final fiderData = Finder(filter: Filter.equals('ISBN', statement.ISBN));
-    await store.update(db, {
-      'bookName' : statement.bookName,
-      'price' : statement.price
-    },
-    finder: fiderData);
+    await store.update(
+        db, {'bookName': statement.bookName, 'price': statement.price},
+        finder: fiderData);
     db.close();
   }
 
-  Future DeleteData(BookModel statement) async{
+  Future DeleteData(BookModel statement) async {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store('bookstore');
 
@@ -62,8 +60,11 @@ class transactionDB {
     var snapshot = await store.find(db);
     print(snapshot);
     var bookList = <BookModel>[];
-    for(var record in snapshot){
-      bookList.add(BookModel(ISBN: record.value['ISBN'].toString(), bookName: record.value['bookName'].toString(), price: double.parse(record.value['price'].toString())));
+    for (var record in snapshot) {
+      bookList.add(BookModel(
+          ISBN: record.value['ISBN'].toString(),
+          bookName: record.value['bookName'].toString(),
+          price: double.parse(record.value['price'].toString())));
     }
     db.close();
     return bookList;

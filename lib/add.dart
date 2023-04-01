@@ -52,7 +52,7 @@ class _AddForm extends State<AddForm> {
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return 'กรุณากรอก ISBN';
                     }
                   },
@@ -76,19 +76,20 @@ class _AddForm extends State<AddForm> {
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: bookName_Controller,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     hintText: 'Book Name',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return 'กรุณาระบุชื่อหนังสือ';
                     }
                   },
                 ),
                 const SizedBox(height: 20),
                 //-----------------End bookName -----------------
-        
+
                 Row(
                   children: [
                     Container(
@@ -111,17 +112,17 @@ class _AddForm extends State<AddForm> {
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return 'กรุณาระบุราคาหนังสือ';
                     }
-                    if(double.parse(value) <= 0){
+                    if (double.parse(value) <= 0) {
                       return 'กรุณากรอกตัวเลขมากกว่า 0';
                     }
                   },
                 ),
-            
+
                 //-----------------End bookprice -----------------
-        
+
                 const SizedBox(height: 20),
                 //ปุ่ม Cancle และ Submit
                 Row(
@@ -137,16 +138,20 @@ class _AddForm extends State<AddForm> {
                     const SizedBox(width: 20),
                     ElevatedButton(
                       onPressed: () {
-                        if(formKey.currentState!.validate()){
+                        if (formKey.currentState!.validate()) {
                           var ISBN = ISBN_Controller.text;
                           var bookName = bookName_Controller.text;
                           var price = price_Controller.text;
-        
-                          var statement = BookModel(ISBN: ISBN, bookName: bookName, price: double.parse(price));
-                          var provider = Provider.of<test_provider>(context,listen: false);
+
+                          var statement = BookModel(
+                              ISBN: ISBN,
+                              bookName: bookName,
+                              price: double.parse(price));
+                          var provider = Provider.of<test_provider>(context,
+                              listen: false);
                           provider.addBook(statement);
                           //print(ISBN + bookName + price);
-        
+
                           Navigator.pop(context);
                         }
                       },
