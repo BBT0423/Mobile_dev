@@ -37,6 +37,11 @@ class transactionDB {
     var store = intMapStoreFactory.store('bookstore');
 
     final fiderData = Finder(filter: Filter.equals('ISBN', statement.ISBN));
+
+    var snapshot = await store.find(db,
+        finder: Finder(filter: Filter.equals('ISBN', statement.ISBN)));
+    print(snapshot);
+
     await store.update(
         db, {'bookName': statement.bookName, 'price': statement.price},
         finder: fiderData);

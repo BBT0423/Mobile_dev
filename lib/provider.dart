@@ -5,9 +5,9 @@ import 'package:sembast/sembast.dart';
 
 class test_provider extends ChangeNotifier {
   List<BookModel> bookDetail = [
-    // BookModel(ISBN: '9503895032134', bookName: 'Mobile Dev.', price: 250),
-    // BookModel(ISBN: '6578543298797', bookName: 'Flutter', price: 350),
-    // BookModel(ISBN: '6330200483', bookName: 'ไก่อ่อน', price: 50),
+    BookModel(ISBN: '9503895032134', bookName: 'Mobile Dev.', price: 250),
+    BookModel(ISBN: '6578543298797', bookName: 'Flutter', price: 350),
+    BookModel(ISBN: '6330200483', bookName: 'ไก่อ่อน', price: 50),
   ];
 
   List<BookModel> getData() {

@@ -80,7 +80,6 @@ class _EditForm extends State<EditForm> {
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: bookName_Controller,
-                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     hintText: 'Book Name',
                     border: OutlineInputBorder(),
@@ -142,7 +141,7 @@ class _EditForm extends State<EditForm> {
                     ),
                     const SizedBox(width: 20),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           var ISBN = ISBN_Controller.text;
                           var bookName = bookName_Controller.text;
