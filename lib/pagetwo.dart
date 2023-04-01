@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/add.dart';
 import 'package:flutter_application_7/provider.dart';
-
 import 'package:provider/provider.dart';
 
 class MyApptwo extends StatefulWidget {

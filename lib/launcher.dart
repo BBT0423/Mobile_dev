@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/home.dart';
+import 'package:flutter_application_7/pagetree.dart';
 import 'package:flutter_application_7/pagetwo.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,7 +20,7 @@ class _LauncherState extends State<Launcher> {
   final List<Widget> _pageWidget = <Widget>[
     const Home(),
     MyApptwo(),
-    Text('list of objective'),
+    MyApptree(),
   ];
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -31,8 +32,8 @@ class _LauncherState extends State<Launcher> {
       label: 'รายการหนังสือ',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.library_add),
-      label: 'Manga online',
+      icon: Icon(Icons.account_box),
+      label: 'Account',
     ),
   ];
 
