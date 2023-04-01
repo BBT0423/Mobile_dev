@@ -16,8 +16,10 @@ class _EditForm extends State<EditForm> {
     final bookDetail = ModalRoute.of(context)!.settings.arguments as BookModel;
 
     final ISBN_Controller = TextEditingController(text: bookDetail.ISBN);
-    final bookName_Controller = TextEditingController(text: bookDetail.bookName);
-    final price_Controller = TextEditingController(text: bookDetail.price.toString());
+    final bookName_Controller =
+        TextEditingController(text: bookDetail.bookName);
+    final price_Controller =
+        TextEditingController(text: bookDetail.price.toString());
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +56,7 @@ class _EditForm extends State<EditForm> {
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return 'กรุณากรอก ISBN';
                     }
                   },
@@ -78,19 +80,20 @@ class _EditForm extends State<EditForm> {
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: bookName_Controller,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     hintText: 'Book Name',
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return 'กรุณาระบุชื่อหนังสือ';
                     }
                   },
                 ),
                 const SizedBox(height: 20),
                 //-----------------End bookName -----------------
-        
+
                 Row(
                   children: [
                     Container(
@@ -105,6 +108,7 @@ class _EditForm extends State<EditForm> {
                   ],
                 ),
                 const SizedBox(height: 10),
+
                 TextFormField(
                   controller: price_Controller,
                   keyboardType: TextInputType.number,
@@ -113,17 +117,17 @@ class _EditForm extends State<EditForm> {
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return 'กรุณาระบุราคาหนังสือ';
                     }
-                    if(double.parse(value) <= 0){
+                    if (double.parse(value) <= 0) {
                       return 'กรุณากรอกตัวเลขมากกว่า 0';
                     }
                   },
                 ),
-            
+
                 //-----------------End bookprice -----------------
-        
+
                 const SizedBox(height: 20),
                 //ปุ่ม Cancle และ Submit
                 Row(
@@ -139,16 +143,20 @@ class _EditForm extends State<EditForm> {
                     const SizedBox(width: 20),
                     ElevatedButton(
                       onPressed: () {
-                        if(formKey.currentState!.validate()){
+                        if (formKey.currentState!.validate()) {
                           var ISBN = ISBN_Controller.text;
                           var bookName = bookName_Controller.text;
                           var price = price_Controller.text;
-        
-                          var statement = BookModel(ISBN: ISBN, bookName: bookName, price: double.parse(price));
-                          var provider = Provider.of<test_provider>(context,listen: false);
+
+                          var statement = BookModel(
+                              ISBN: ISBN,
+                              bookName: bookName,
+                              price: double.parse(price));
+                          var provider = Provider.of<test_provider>(context,
+                              listen: false);
                           provider.editBook(statement);
                           //print(ISBN + bookName + price);
-        
+
                           Navigator.pop(context);
                         }
                       },
@@ -167,9 +175,10 @@ class _EditForm extends State<EditForm> {
                     ),
                   ),
                   onTap: () {
-                    Navigator.pop(context);    
-                            
-                    var provider = Provider.of<test_provider>(context, listen: false);
+                    Navigator.pop(context);
+
+                    var provider =
+                        Provider.of<test_provider>(context, listen: false);
                     provider.deleteBook(bookDetail);
                   },
                 )
