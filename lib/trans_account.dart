@@ -25,9 +25,31 @@ class transactionaccount {
     var keyID = store.add(ac, {
       'Name': statement.Name,
       'password': statement.password,
+      'Email': statement.Email,
     });
     ac.close();
     return keyID;
+  }
+
+  Future EditData(Account statement) async {
+    var ac = await this.openDatabase();
+    var store = intMapStoreFactory.store('accuntstore');
+
+    final fiderData = Finder(filter: Filter.equals('Name', statement.Name));
+    await store.update(
+        ac, {'Name': statement.Name, 'password': statement.password},
+        finder: fiderData);
+    ac.close();
+  }
+
+  Future DeleteData(Account statement) async {
+    var ac = await this.openDatabase();
+    var store = intMapStoreFactory.store('accountstore');
+
+    final fiderData = Finder(filter: Filter.equals('Name', statement.Name));
+    await store.delete(ac, finder: fiderData);
+    print(fiderData);
+    ac.close();
   }
 
   Future selectData() async {
@@ -41,8 +63,10 @@ class transactionaccount {
       accountList.add(Account(
         Name: record.value['Name'].toString(),
         password: record.value['password'].toString(),
+        Email: record.value['Email'].toString(),
       ));
     }
+    ac.close();
     return accountList;
   }
 }

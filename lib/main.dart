@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_7/launcher.dart';
 import 'package:flutter_application_7/provider.dart';
+import 'package:flutter_application_7/provider_for_account.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -8,7 +9,12 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: ((_) {
         return test_provider();
-      }))
+      })),
+      ChangeNotifierProvider(
+        create: (context) {
+          return provider_account();
+        },
+      )
     ],
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
